@@ -1,11 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import { StyleSheet, FlatList, View, Platform } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { ThemeProvider, Text, Input, Button, CheckBox } from '@rneui/themed';
 
 export default function App() {
-  
   const [tasks, setTasks] = useState([
     { key: "1", description: "Complete resume", completed: false },
     { key: "2", description: "Go to the gym", completed: true },
@@ -13,6 +11,7 @@ export default function App() {
   ]);
 
   const [newTask, setNewTask] = useState('');
+
 
   const toggleTask = (key) => {
     setTasks(prevTasks =>
@@ -36,17 +35,15 @@ export default function App() {
     setTasks([...tasks, newItem]);
     setNewTask('');
   };
+  const deleteAllTasks = () => {
+    setTasks([]);
+    setDeleteAll('');
+  };
 
   const renderItem = ({ item }) => (
     <CheckBox
       title={
-        <Text
-          style={
-            item.completed
-              ? styles.completedText
-              : styles.normalText
-          }
-        >
+        <Text style={item.completed ? styles.completedText : styles.normalText}>
           {item.description}
         </Text>
       }
@@ -68,6 +65,8 @@ export default function App() {
         />
 
         <Button title="Add" onPress={addTask} />
+        <Button title="Delete All" onPress={deleteAllTasks} containerStyle={{ marginTop: 10 }} />
+
 
         <FlatList
           data={tasks}
@@ -91,10 +90,14 @@ const styles = StyleSheet.create({
   },
   completedText: {
     textDecorationLine: 'line-through',
-    textDecorationStyle: 'solid',
     color: 'gray',
   },
   normalText: {
-    textDecorationLine: 'green',
+    textDecorationLine: 'none',
+    color: 'black',
+  },
+  headerText: {
+    fontSize: 24,
+    marginBottom: 10,
   },
 });
