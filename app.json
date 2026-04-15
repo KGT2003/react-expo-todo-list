@@ -12,6 +12,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "experiments": {
+      "baseUrl": "/react-expo-todo-list"
+    },
+    
     "ios": {
       "supportsTablet": true
     },
